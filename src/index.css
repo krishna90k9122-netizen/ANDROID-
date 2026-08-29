@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Colors */
+  --color-primary: #0A1931;        /* Deep Navy */
+  --color-secondary: #3F51B5;      /* Electric Blue */
+  --color-purple: #7B1FA2;         /* Brand Purple */
+  --color-cta: #FF0D1A;            /* Bright Red */
+  --color-accent-orange: #FF8A00;  /* Soft Orange */
+  --color-success-green: #00C853;  /* Success / Offline Green */
+  
+  /* Neutral Colors */
+  --color-bg-light: #F8F9FD;
+  --color-white: #FFFFFF;
+  --color-text-dark: #0A1931;
+  --color-text-muted: #6C7A9C;
+  --color-border-light: #E0E6F0;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0A1931 0%, #15305B 100%);
+  --gradient-accent: linear-gradient(135deg, #3F51B5 0%, #7B1FA2 100%);
+  --gradient-cta: linear-gradient(135deg, #FF0D1A 0%, #FF5252 100%);
+  --gradient-stats: linear-gradient(135deg, #0A1931 0%, #7B1FA2 50%, #FF0D1A 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 8px rgba(10, 25, 49, 0.05);
+  --shadow-md: 0 8px 24px rgba(10, 25, 49, 0.08);
+  --shadow-lg: 0 16px 36px rgba(10, 25, 49, 0.12);
+  --shadow-glow: 0 8px 20px rgba(255, 13, 26, 0.35);
+  --shadow-blue-glow: 0 8px 20px rgba(63, 81, 181, 0.25);
+  
+  /* Sizing and Borders */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  
+  /* Transition durations */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #121824; /* Dark outer backdrop */
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Headings utilize Outfit font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.25;
+}
+
+/* --- DEVICE SIMULATOR CONTAINER --- */
+.app-simulator-wrapper {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: var(--color-bg-light);
+  border-radius: 44px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 12px solid #1E2022;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+/* Simulating Android status notch / punch-hole camera */
+.app-simulator-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background-color: #000000;
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+/* Phone Screen Outer Shadows for Depth */
+.phone-shadow-overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 32px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* Simulator viewport scroll area */
+.app-screen-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--color-bg-light);
+  position: relative;
+  padding-bottom: 74px; /* Space for sticky bottom navigation */
+}
+
+/* Hide scrollbars but preserve scrolling */
+.app-screen-viewport::-webkit-scrollbar {
+  display: none;
+}
+.app-screen-viewport {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Responsive Overrides: If screen is small, act like a native mobile app */
+@media (max-width: 600px) {
+  body {
+    background-color: var(--color-bg-light);
+    display: block;
+    overflow: auto;
+  }
+  .app-simulator-wrapper {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+  .app-simulator-wrapper::before {
+    display: none;
+  }
+  .app-screen-viewport {
+    height: 100vh;
+  }
+}
+
+/* --- ANDROID STATUS BAR --- */
+.android-status-bar {
+  height: 36px;
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  z-index: 99;
+  user-select: none;
+  position: sticky;
+  top: 0;
+}
+
+.status-bar-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* --- ANDROID NAVIGATION PILL (BOTTOM GESTURE BAR) --- */
+.android-gesture-pill {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 4px;
+  background-color: rgba(10, 25, 49, 0.4);
+  border-radius: 2px;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+/* --- GLOBAL ANIMATIONS & EFFECTS --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 13, 26, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 13, 26, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 13, 26, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- MICRO-INTERACTION STYLES --- */
+.press-effect {
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.press-effect:active {
+  transform: scale(0.96);
+  filter: brightness(0.92);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.hover-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Custom Scroll Containers for horizontal swiping */
+.scroll-x-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 8px 20px 20px 20px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-x-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-x-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+/* Badge styles */
+.badge-ai {
+  background: var(--gradient-accent);
+  color: var(--color-white);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+}
