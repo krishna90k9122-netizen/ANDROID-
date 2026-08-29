@@ -152,33 +152,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* --- ANDROID STATUS BAR --- */
-.android-status-bar {
-  height: 36px;
-  background-color: var(--color-white);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 24px 0 24px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-primary);
-  z-index: 99;
-  user-select: none;
-  position: sticky;
-  top: 0;
-}
-
-.status-bar-icons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.status-icon {
-  width: 15px;
-  height: 15px;
-}
 
 /* --- ANDROID NAVIGATION PILL (BOTTOM GESTURE BAR) --- */
 .android-gesture-pill {

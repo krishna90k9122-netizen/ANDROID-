@@ -11,7 +11,7 @@ export default function AdvisoryCard() {
         <div className="advisory-card-header">
           <div className="advisor-portrait-wrapper">
             <img 
-              src="/assets/advisory_quotes.png" 
+              src="/assets/advisor_portrait.png" 
               alt="Advisor Portrait" 
               className="advisor-portrait-img"
             />
@@ -98,11 +98,11 @@ export default function AdvisoryCard() {
 
         /* Crop her portrait from the image sheet */
         .advisor-portrait-img {
-          position: absolute;
-          width: 250%; /* Scale up to zoom on her face */
-          height: auto;
-          top: -2px;
-          left: -12px; /* Shifts to center her face */
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transform: scale(1.12);
         }
 
         .advisor-section-title {
