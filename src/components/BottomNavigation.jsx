@@ -51,7 +51,7 @@ export default function BottomNavigation({ currentTab, setCurrentTab }) {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 68px;
+          height: calc(68px + env(safe-area-inset-bottom, 0px));
           background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
@@ -60,7 +60,7 @@ export default function BottomNavigation({ currentTab, setCurrentTab }) {
           grid-template-columns: repeat(5, 1fr);
           align-items: center;
           justify-items: center;
-          padding-bottom: 4px; /* Room for gesture bar */
+          padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px)); /* Room for gesture bar and safe areas */
           z-index: 1000;
         }
 

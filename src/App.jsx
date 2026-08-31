@@ -103,7 +103,7 @@ export default function App() {
           {/* 1. HOME TAB */}
           {currentTab === 'home' && (
             <div className="tab-page animate-fade-in-up">
-              <HeroSection onDiscoverMore={() => setCurrentTab('services')} />
+              <HeroSection />
               <ServiceCarousel onSelectService={handleServiceSelect} />
               <ExploreServices onSelectInitiative={handleInitiativeSelect} />
               <WhyVaaniSetu />
@@ -439,6 +439,8 @@ export default function App() {
           flex: 1;
           overflow-y: auto;
           position: relative;
+          padding-bottom: 84px; /* Ensure content is not covered by bottom navigation */
+          -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on mobile */
         }
 
         .tab-page {

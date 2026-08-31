@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* Brand Colors */
@@ -114,18 +114,16 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden; /* Main viewport wrapper is not scrollable */
   background-color: var(--color-bg-light);
   position: relative;
-  padding-bottom: 74px; /* Space for sticky bottom navigation */
 }
 
-/* Hide scrollbars but preserve scrolling */
-.app-screen-viewport::-webkit-scrollbar {
+/* Hide scrollbars */
+.tab-scroll-container::-webkit-scrollbar {
   display: none;
 }
-.app-screen-viewport {
+.tab-scroll-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -135,7 +133,9 @@ h1, h2, h3, h4, h5, h6 {
   body {
     background-color: var(--color-bg-light);
     display: block;
-    overflow: auto;
+    overflow: hidden; /* Lock body scrolling to prevent mobile layout jitter */
+    height: 100vh;
+    width: 100vw;
   }
   .app-simulator-wrapper {
     width: 100vw;
@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
   .app-screen-viewport {
-    height: 100vh;
+    height: 100%;
   }
 }
 

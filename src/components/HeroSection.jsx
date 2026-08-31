@@ -1,7 +1,7 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-export default function HeroSection({ onDiscoverMore }) {
+export default function HeroSection() {
   return (
     <section className="hero-section animate-fade-in-up">
       {/* Content Container (sitting in front of the background image) */}
@@ -14,29 +14,25 @@ export default function HeroSection({ onDiscoverMore }) {
         <h1 className="hero-title-main">
           AI-Powered Vernacular Education for <span className="text-highlight-red">Every Child.</span>
         </h1>
-
-        <p className="hero-desc-main">
-          Bridging the language gap by enabling teachers to teach, communicate and assess in tribal languages.
-        </p>
-
-        <button className="btn-hero-cta press-effect" onClick={onDiscoverMore}>
-          <span>Discover More</span>
-          <div className="cta-arrow-circle">
-            <ArrowRight size={12} color="#FF334B" strokeWidth={3.5} />
-          </div>
-        </button>
+        <div className="hindi-msg-container">
+          <p className="hindi-line">भाषा अलग हो सकती है... <span className="hindi-word-highlight">सपने नहीं।</span></p>
+          <p className="hindi-line">शब्द अलग हो सकते हैं... <span className="hindi-word-highlight">समझ नहीं।</span></p>
+          <p className="hindi-line-hero">
+            और इसी समझ की दूरी को मिटाने का नाम है... <span className="text-highlight-brand-vs">VaaniSetu!</span>
+          </p>
+        </div>
       </div>
 
       {/* Bottom Features Benefits Bar */}
       <div className="hero-benefits-bar">
         <div className="benefit-item">
-          <span className="benefit-icon">⚡</span>
-          <span>AI-Driven</span>
+          <span className="benefit-icon">☁️</span>
+          <span>Offline-First</span>
         </div>
         <div className="benefit-divider">|</div>
         <div className="benefit-item">
-          <span className="benefit-icon">☁️</span>
-          <span>Offline-First</span>
+          <span className="benefit-icon">🌐</span>
+          <span>Multi-Language</span>
         </div>
         <div className="benefit-divider">|</div>
         <div className="benefit-item">
@@ -50,8 +46,9 @@ export default function HeroSection({ onDiscoverMore }) {
           position: relative;
           background-image: url('/assets/hero_bg.png');
           background-size: cover;
-          background-position: 72% center; /* Centers the schoolgirl holding the tablet beautifully */
+          background-position: right center; /* Focus on the schoolgirl on the right */
           background-repeat: no-repeat;
+          background-color: #6a1b9a; /* Deep purple fallback matching the background to prevent any white edge leaks */
           padding: 24px 20px 64px 20px; /* Large bottom padding to accommodate benefits bar */
           overflow: hidden;
           display: flex;
@@ -101,49 +98,61 @@ export default function HeroSection({ onDiscoverMore }) {
           font-weight: 900;
         }
 
-        .hero-desc-main {
-          font-family: 'Outfit', sans-serif;
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(12px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .hindi-msg-container {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          margin-top: 8px;
+          animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          font-family: 'Poppins', 'Outfit', sans-serif;
+        }
+
+        .hindi-line {
+          font-family: 'Poppins', sans-serif;
           font-size: 11px;
-          color: rgba(255, 255, 255, 0.9);
-          line-height: 1.45;
+          color: rgba(255, 255, 255, 0.95);
+          line-height: 1.4;
           font-weight: 500;
-          letter-spacing: 0.1px;
+          letter-spacing: 0.2px;
+          margin: 0;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
         }
 
-        .btn-hero-cta {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: #FF334B; /* Matching vibrant red button from mockup */
+        .hindi-word-highlight {
+          color: #FF8A00; /* Beautiful brand orange accent highlight */
+          font-weight: 600;
+        }
+
+        .hindi-line-hero {
+          font-family: 'Poppins', sans-serif;
+          font-size: 12.5px;
           color: var(--color-white);
-          border: none;
-          padding: 8px 16px;
-          border-radius: 50px;
-          font-family: 'Outfit', sans-serif;
+          line-height: 1.4;
+          font-weight: 700;
+          margin-top: 6px;
+          margin-bottom: 0;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .text-highlight-brand-vs {
+          background: linear-gradient(135deg, #FF334B 0%, #FF8A00 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
           font-weight: 800;
-          font-size: 11px;
-          cursor: pointer;
-          align-self: flex-start;
-          box-shadow: 0 4px 12px rgba(255, 51, 75, 0.35);
-          transition: all var(--transition-fast);
-          margin-top: 4px;
+          display: inline-block;
         }
 
-        .btn-hero-cta:hover {
-          background-color: #E6223A;
-          transform: translateY(-1px);
-          box-shadow: 0 6px 16px rgba(255, 51, 75, 0.45);
-        }
-
-        .cta-arrow-circle {
-          width: 20px;
-          height: 20px;
-          background-color: var(--color-white);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
 
         /* Bottom Benefits Bar */
         .hero-benefits-bar {
