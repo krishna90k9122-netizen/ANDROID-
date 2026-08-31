@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AndroidFrame from './components/AndroidFrame';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -32,6 +32,44 @@ import {
 } from 'lucide-react';
 
 export default function App() {
+  const [appLoading, setAppLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingStatus, setLoadingStatus] = useState("Initializing local AI models...");
+
+  useEffect(() => {
+    if (!appLoading) return;
+    
+    const interval = setInterval(() => {
+      setLoadingProgress((prev) => {
+        const next = prev + Math.floor(Math.random() * 15) + 5;
+        if (next >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setAppLoading(false);
+          }, 400); // Small delay to let user see 100% complete
+          return 100;
+        }
+        
+        // Update statuses dynamically
+        if (next < 25) {
+          setLoadingStatus("Initializing local AI models...");
+        } else if (next < 50) {
+          setLoadingStatus("Loading vernacular dictionary matrices...");
+        } else if (next < 75) {
+          setLoadingStatus("Caching speech recognition vectors...");
+        } else if (next < 95) {
+          setLoadingStatus("Readying offline voice bridge...");
+        } else {
+          setLoadingStatus("VaaniSetu is ready!");
+        }
+        
+        return next;
+      });
+    }, 120);
+
+    return () => clearInterval(interval);
+  }, [appLoading]);
+
   const [currentTab, setCurrentTab] = useState('home');
   const [activeLanguage, setActiveLanguage] = useState('gon');
   const [toastMessage, setToastMessage] = useState(null);
@@ -90,8 +128,36 @@ export default function App() {
   return (
     <PlatformSpecificLayout>
       <AndroidFrame>
-        {/* Top App Header with global navigation states */}
-        <Header 
+        {appLoading ? (
+          <div className="app-splash-screen">
+            <div className="splash-glow" />
+            <div className="splash-logo-container">
+              <div className="splash-logo-circle">
+                <span className="splash-sparkle">✦</span>
+              </div>
+              <h1 className="splash-app-title">VaaniSetu</h1>
+              <p className="splash-app-subtitle">वाणीसेतु</p>
+            </div>
+            
+            <div className="splash-loader-container">
+              <div className="splash-progress-track">
+                <div className="splash-progress-bar" style={{ width: `${loadingProgress}%` }} />
+              </div>
+              <div className="splash-progress-metrics">
+                <span className="splash-status-text">{loadingStatus}</span>
+                <span className="splash-percentage">{loadingProgress}%</span>
+              </div>
+            </div>
+            
+            <div className="splash-footer">
+              <p>Vernacular Education for Every Child</p>
+              <span className="splash-offline-badge">Offline Edge AI</span>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Top App Header with global navigation states */}
+            <Header 
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
           setLanguage={handleLanguageChange}
@@ -431,6 +497,8 @@ export default function App() {
           currentTab={currentTab} 
           setCurrentTab={setCurrentTab} 
         />
+          </>
+        )}
       </AndroidFrame>
 
       {/* Embedded CSS Specifics for Tab Layouts */}
@@ -1021,6 +1089,173 @@ export default function App() {
           justify-content: center;
           box-shadow: var(--shadow-lg);
           z-index: 1010;
+        }
+
+        /* SPLASH SCREEN STYLES */
+        .app-splash-screen {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(160deg, #2e0854 0%, #120324 100%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 60px 24px 40px 24px;
+          z-index: 2000;
+          overflow: hidden;
+        }
+
+        .splash-glow {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, rgba(255, 51, 75, 0.15) 0%, rgba(123, 31, 162, 0.15) 50%, transparent 100%);
+          top: 15%;
+          left: 50%;
+          transform: translateX(-50%);
+          filter: blur(40px);
+          pointer-events: none;
+          animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+          0% { opacity: 0.6; transform: translateX(-50%) scale(0.9); }
+          100% { opacity: 1.0; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .splash-logo-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 80px;
+          z-index: 10;
+        }
+
+        .splash-logo-circle {
+          width: 72px;
+          height: 72px;
+          background: linear-gradient(135deg, #FF334B 0%, #FF8A00 100%);
+          border-radius: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 12px 24px rgba(255, 51, 75, 0.3);
+          transform: rotate(-10deg);
+          animation: logoEntrance 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes logoEntrance {
+          0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+          100% { transform: scale(1) rotate(-10deg); opacity: 1; }
+        }
+
+        .splash-sparkle {
+          font-size: 36px;
+          color: white;
+          animation: rotateSparkle 6s linear infinite;
+        }
+
+        @keyframes rotateSparkle {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .splash-app-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 28px;
+          font-weight: 900;
+          color: white;
+          margin-top: 20px;
+          letter-spacing: -0.5px;
+          background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .splash-app-subtitle {
+          font-family: 'Poppins', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.6);
+          margin-top: 2px;
+          letter-spacing: 2px;
+        }
+
+        .splash-loader-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-bottom: 60px;
+          z-index: 10;
+        }
+
+        .splash-progress-track {
+          width: 100%;
+          height: 6px;
+          background-color: rgba(255, 255, 255, 0.08);
+          border-radius: 10px;
+          overflow: hidden;
+          position: relative;
+          border: 0.5px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .splash-progress-bar {
+          height: 100%;
+          background: linear-gradient(90deg, #FF334B 0%, #FF8A00 50%, #7B1FA2 100%);
+          border-radius: 10px;
+          transition: width 0.15s ease-out;
+        }
+
+        .splash-progress-metrics {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: 'Outfit', sans-serif;
+          font-size: 11px;
+        }
+
+        .splash-status-text {
+          color: rgba(255, 255, 255, 0.7);
+          font-weight: 500;
+          transition: all 0.2s ease;
+        }
+
+        .splash-percentage {
+          color: #FF8A00;
+          font-weight: 700;
+        }
+
+        .splash-footer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          z-index: 10;
+        }
+
+        .splash-footer p {
+          font-family: 'Outfit', sans-serif;
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.45);
+          letter-spacing: 0.2px;
+          margin: 0;
+        }
+
+        .splash-offline-badge {
+          background-color: rgba(255, 255, 255, 0.06);
+          color: rgba(255, 255, 255, 0.8);
+          border: 0.5px solid rgba(255, 255, 255, 0.1);
+          padding: 4px 10px;
+          border-radius: 20px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
       `}</style>
     </PlatformSpecificLayout>
