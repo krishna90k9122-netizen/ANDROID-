@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
-import heroBgExactHd from '../../../../.gemini/antigravity-ide/brain/67404736-99df-44c9-a535-3994b22174fe/hero_bg_exact_hd_1788270356476.jpg';
+import heroBgExactHd from '../assets/hero_bg_exact_hd.jpg';
 
 export default function HeroSection() {
   return (
