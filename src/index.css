@@ -135,11 +135,13 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     overflow: hidden; /* Lock body scrolling to prevent mobile layout jitter */
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
   }
   .app-simulator-wrapper {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     border-radius: 0;
     border: none;
     box-shadow: none;

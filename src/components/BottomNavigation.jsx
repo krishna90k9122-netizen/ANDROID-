@@ -117,6 +117,8 @@ export default function BottomNavigation({ currentTab, setCurrentTab }) {
         .btn-floating-ai {
           position: absolute;
           top: -24px; /* Floats above tabbar */
+          left: 50%;
+          transform: translateX(-50%);
           width: 50px;
           height: 50px;
           border-radius: 50%;
@@ -133,13 +135,13 @@ export default function BottomNavigation({ currentTab, setCurrentTab }) {
         }
 
         .btn-floating-ai:active {
-          transform: translateY(-2px) scale(0.95);
+          transform: translateX(-50%) translateY(-2px) scale(0.95);
           box-shadow: 0 4px 10px rgba(255, 13, 26, 0.2);
         }
 
         .btn-floating-ai.active {
           background: var(--gradient-stats);
-          transform: translateY(-2px) rotate(15deg);
+          transform: translateX(-50%) translateY(-2px) rotate(15deg);
         }
 
         .center-label {

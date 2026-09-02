@@ -168,7 +168,7 @@ export default function App() {
         <main className="tab-scroll-container">
           {/* 1. HOME TAB */}
           {currentTab === 'home' && (
-            <div className="tab-page animate-fade-in-up">
+            <div className="tab-page home-page animate-fade-in-up">
               <HeroSection />
               <ServiceCarousel onSelectService={handleServiceSelect} />
               <ExploreServices onSelectInitiative={handleInitiativeSelect} />
@@ -179,43 +179,41 @@ export default function App() {
             </div>
           )}
 
-          {/* 2. SERVICES TAB (Interactive Workspaces) */}
+          {/* 2. SERVICES & WORKSPACE DEMOS TAB */}
           {currentTab === 'services' && (
             <div className="tab-page services-page animate-fade-in-up">
               <div className="services-page-header">
-                <h2>AI Tools Workspace</h2>
-                <p>Run locally on your Android edge device.</p>
+                <h2>AI Classroom Services</h2>
+                <p>Interactive edge-AI tools designed for vernacular educators.</p>
               </div>
 
-              {/* Toggle Interactive demo switcher */}
               <div className="workspace-tabs-pill">
                 <button 
-                  className={selectedServiceDemo === 'translator' ? 'active' : ''} 
+                  className={selectedServiceDemo === 'translator' ? 'active' : ''}
                   onClick={() => setSelectedServiceDemo('translator')}
                 >
-                  Text Translator
+                  Translator
                 </button>
                 <button 
-                  className={selectedServiceDemo === 'voice' ? 'active' : ''} 
+                  className={selectedServiceDemo === 'voice' ? 'active' : ''}
                   onClick={() => setSelectedServiceDemo('voice')}
                 >
                   Voice Bridge
                 </button>
                 <button 
-                  className={selectedServiceDemo === 'worksheet' ? 'active' : ''} 
+                  className={selectedServiceDemo === 'worksheet' ? 'active' : ''}
                   onClick={() => setSelectedServiceDemo('worksheet')}
                 >
                   Worksheet Gen
                 </button>
                 <button 
-                  className={selectedServiceDemo === 'flashcard' ? 'active' : ''} 
+                  className={selectedServiceDemo === 'flashcard' ? 'active' : ''}
                   onClick={() => setSelectedServiceDemo('flashcard')}
                 >
-                  Flashcard Creator
+                  Flashcards
                 </button>
               </div>
 
-              {/* Display selected interactive panel */}
               <div className="workspace-active-demo">
                 {selectedServiceDemo === 'translator' && <ContentTranslatorDemo />}
                 {selectedServiceDemo === 'voice' && <RealTimeVoiceDemo />}
@@ -223,30 +221,40 @@ export default function App() {
                 {selectedServiceDemo === 'flashcard' && <FlashcardCreatorDemo />}
               </div>
 
-              {/* Other services preview */}
               <div className="other-tools-list">
-                <h3>Additional Services</h3>
-                
-                <div className="tool-strip press-effect" onClick={() => handleServiceSelect('flashcard')}>
-                  <div className="tool-strip-icon bg-orange">✨</div>
+                <h3>Additional Educational Modules</h3>
+                <div 
+                  className="tool-strip press-effect"
+                  onClick={() => {
+                    setCurrentTab('profile');
+                    triggerToast('Offline database and model manager');
+                  }}
+                >
+                  <div className="tool-strip-icon bg-green">⚡</div>
                   <div className="tool-strip-info">
-                    <h4>Bilingual Flashcard Creator</h4>
-                    <p>Create visual memory cards with local audio pronunciations.</p>
+                    <h4>Offline-First Synchronization</h4>
+                    <p>Local vector caching for low-connectivity rural classrooms.</p>
                   </div>
                 </div>
 
-                <div className="tool-strip press-effect" onClick={() => handleServiceSelect('offline')}>
-                  <div className="tool-strip-icon bg-green">☁</div>
+                <div 
+                  className="tool-strip press-effect"
+                  onClick={() => {
+                    setCurrentTab('resources');
+                    triggerToast('Viewing pedagogical literacy guides');
+                  }}
+                >
+                  <div className="tool-strip-icon bg-orange">📚</div>
                   <div className="tool-strip-info">
-                    <h4>Offline-First Database Cache</h4>
-                    <p>Sync all audio vectors and neural networks to offline storage.</p>
+                    <h4>Pedagogical Resource Bank</h4>
+                    <p>Bilingual textbooks, dialogue guides, and activity sheets.</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* 3. QUICK LAUNCH AI TOOLS DASHBOARD (Floating button shortcut) */}
+          {/* 3. AI TOOLS ENGINE DASHBOARD TAB */}
           {currentTab === 'ai-tools' && (
             <div className="tab-page ai-tools-dashboard animate-fade-in-up">
               <div className="ai-tools-glow-box">

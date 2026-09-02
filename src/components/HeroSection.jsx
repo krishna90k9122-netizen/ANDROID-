@@ -1,9 +1,13 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import heroBgExactHd from '../../../../.gemini/antigravity-ide/brain/67404736-99df-44c9-a535-3994b22174fe/hero_bg_exact_hd_1788270356476.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="hero-section animate-fade-in-up">
+    <section 
+      className="hero-section animate-fade-in-up"
+      style={{ backgroundImage: `url(${heroBgExactHd})` }}
+    >
       {/* Content Container (sitting in front of the background image) */}
       <div className="hero-content">
         <div className="badge-ai-hero">
@@ -44,31 +48,30 @@ export default function HeroSection() {
       <style>{`
         .hero-section {
           position: relative;
-          background-image: url('/assets/hero_bg.png');
           background-size: cover;
           background-position: right center; /* Focus on the schoolgirl on the right */
           background-repeat: no-repeat;
-          background-color: #6a1b9a; /* Deep purple fallback matching the background to prevent any white edge leaks */
+          background-color: #6a1b9a;
           padding: 24px 20px 64px 20px; /* Large bottom padding to accommodate benefits bar */
           overflow: hidden;
           display: flex;
           min-height: 290px;
           border-bottom: 1px solid var(--color-border-light);
+          image-rendering: -webkit-optimize-contrast;
         }
 
         .hero-content {
-          width: 58%; /* Sized to allow layout visibility on the right */
+          width: 60%; /* Sized to allow layout visibility on the right */
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 8px;
           z-index: 2;
           position: relative;
-          text-shadow: 0 1px 4px rgba(0,0,0,0.35); /* Soft shadow for maximum text readability */
         }
 
         .badge-ai-hero {
           background: linear-gradient(135deg, #FF334B 0%, #7B1FA2 100%);
-          border: 0.5px solid rgba(255, 255, 255, 0.35);
+          border: 0.5px solid rgba(255, 255, 255, 0.4);
           color: var(--color-white);
           padding: 4px 10px;
           border-radius: 50px;
@@ -81,21 +84,23 @@ export default function HeroSection() {
           align-items: center;
           gap: 4px;
           align-self: flex-start;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .hero-title-main {
           font-family: 'Outfit', sans-serif;
-          font-size: 23px;
+          font-size: 21px;
           font-weight: 900;
           color: var(--color-white);
           line-height: 1.2;
-          letter-spacing: -0.5px;
+          letter-spacing: -0.4px;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.9);
         }
 
         .text-highlight-red {
-          color: #FF334B; /* Exact matching hot pinkish-red from the mockup */
+          color: #FF2E4D; /* Vibrant contrasting red */
           font-weight: 900;
+          text-shadow: 0 0 12px rgba(255, 46, 77, 0.5), 0 2px 6px rgba(0, 0, 0, 0.9);
         }
 
         @keyframes slideUp {
@@ -126,11 +131,11 @@ export default function HeroSection() {
           font-weight: 500;
           letter-spacing: 0.2px;
           margin: 0;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hindi-word-highlight {
-          color: #FF8A00; /* Beautiful brand orange accent highlight */
+          color: #FF8A00; /* Original clean brand orange highlight */
           font-weight: 600;
         }
 
@@ -142,7 +147,7 @@ export default function HeroSection() {
           font-weight: 700;
           margin-top: 6px;
           margin-bottom: 0;
-          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         .text-highlight-brand-vs {
